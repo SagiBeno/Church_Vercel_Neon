@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import './App.css'
 
 async function getData(setChurches) {
-  //const res = await fetch('/api/churches');
+  const res = await fetch('/api/churches');
+  console.log(res)
 }
 
 function App() {
