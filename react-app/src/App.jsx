@@ -21,8 +21,8 @@ function App() {
 
       <h2>POST</h2>
       <form>
-        <input type="text" name='church-name-input' placeholder='Church name...'/>
-        <input type="checkbox" name='church-is-christian-checkbox' />Is Christian?
+        <input type="text" name='church-name-input' placeholder='Church name...' onChange={setChurchName}/>
+        <input type="checkbox" name='church-is-christian-checkbox' onChange={setChristian}/>Is Christian?
         <button onClick={ handlePostButtonClick }>
           Submit Post
         </button>
