@@ -1,33 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
 import './App.css'
 
+async function getData(setChurches) {
+  //const res = await fetch('/api/churches');
+}
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [churches, setChurches] = useState([]);
+  const [churchName, setChurchName] = useState('');
+  const [isChristian, setChristian] = useState(true);
+
+  useEffect( () => {
+    getData(setChurches);
+  }, [])
+
+  const handlePostButtonClick = async (e) => {
+    e.preventDefault();
+    console.log('handlePostButtonClick: ', {churchName, isChristian});
+
+    // fetch POST endpoint
+    const resJson = await fetch('/api/churches', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify( { name: churchName, is_christian: isChristian } )
+    });
+
+    console.log('resJson: ', resJson);
+    const resObj = await resJson.json();
+    console.log('resObj: ', resObj);
+
+  } 
+
+  const handleChristianCheckboxChange = (e) => {
+    console.log('handleChristianCheckboxChange e: ', e);
+    setChristian(e.target.checked);
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <h1>Churches</h1>
+      <div className='card'>
+        <h2>GET</h2>
+
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      
+      <div className='card'>
+        <h2>POST</h2>
+        <form>
+          <input type="text" name='church-name-input' placeholder='Church name...' onChange={(e) => setChurchName(e.target.value)}/>
+          <input type="checkbox" name='church-is-christian-checkbox' value={isChristian} checked={isChristian} onChange={handleChristianCheckboxChange} />Is Christian?
+          <button onClick={ handlePostButtonClick }>
+            Submit Post
+          </button>
+        </form>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
