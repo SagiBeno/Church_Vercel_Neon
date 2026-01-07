@@ -16,7 +16,7 @@ function App() {
 
   const handleChristianCheckboxChange = (e) => {
     console.log('handleChristianCheckboxChange e: ', e);
-    setChristian(e.taget.checked);
+    setChristian(e.target.checked);
   }
 
   return (
