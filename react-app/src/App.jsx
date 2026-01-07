@@ -4,6 +4,14 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
+  const [churchName, setChurchName] = useState('');
+  const [isChristian, setChristian] = useState(true);
+
+  const handlePostButtonClick = async ( {churchName, isChristian} ) => {
+    console.log('handlePostButtonClick: ', {churchName, isChristian});
+    // TODO - fetch POST endpoint
+
+  } 
 
   return (
     <>
@@ -14,8 +22,8 @@ function App() {
       <form>
         <input type="text" name='church-name-input' placeholder='Church name...'/>
         <input type="checkbox" name='church-is-christian-checkbox' />Is Christian?
-        <button>
-          
+        <button onClick={ () => handlePostButtonClick( {churchName, isChristian} )}>
+          Submit Post
         </button>
       </form>
     </>
