@@ -1,16 +1,28 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
+async function getData(setChurches) {
+  
+}
+
 function App() {
+  const [churches, setChurches] = useState([]);
   const [churchName, setChurchName] = useState('');
   const [isChristian, setChristian] = useState(true);
 
   const handlePostButtonClick = async (e) => {
     e.preventDefault();
     console.log('handlePostButtonClick: ', {churchName, isChristian});
-    // TODO - fetch POST endpoint
+
+    // fetch POST endpoint
+    const resJson = await fetch('/api/churches', {
+      method: 'POST',
+      body: JSON.stringify( { name: churchName, is_christian: isChristian } )
+    });
+
+    console.log('resJson: ', resJson);
+    const resObj = await resJson.json();
+    console.log('resObj: ', resObj);
 
   } 
 
@@ -22,16 +34,21 @@ function App() {
   return (
     <>
       <h1>Churches</h1>
-      <h2>GET</h2>
+      <div className='card'>
+        <h2>GET</h2>
 
-      <h2>POST</h2>
-      <form>
-        <input type="text" name='church-name-input' placeholder='Church name...' onChange={(e) => setChurchName(e.target.value)}/>
-        <input type="checkbox" name='church-is-christian-checkbox' value={isChristian} checked={isChristian} onChange={handleChristianCheckboxChange} />Is Christian?
-        <button onClick={ handlePostButtonClick }>
-          Submit Post
-        </button>
-      </form>
+      </div>
+      
+      <div className='card'>
+        <h2>POST</h2>
+        <form>
+          <input type="text" name='church-name-input' placeholder='Church name...' onChange={(e) => setChurchName(e.target.value)}/>
+          <input type="checkbox" name='church-is-christian-checkbox' value={isChristian} checked={isChristian} onChange={handleChristianCheckboxChange} />Is Christian?
+          <button onClick={ handlePostButtonClick }>
+            Submit Post
+          </button>
+        </form>
+      </div>
     </>
   )
 }
