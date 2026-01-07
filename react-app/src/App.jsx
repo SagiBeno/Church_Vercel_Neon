@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 
 async function getData(setChurches) {
-  
+  //const resJson = await fetch('/api')
 }
 
 function App() {
@@ -17,6 +17,7 @@ function App() {
     // fetch POST endpoint
     const resJson = await fetch('/api/churches', {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify( { name: churchName, is_christian: isChristian } )
     });
 

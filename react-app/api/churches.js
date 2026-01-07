@@ -26,7 +26,8 @@ export default async function handler(req, res) {
 
     if (req.method == 'POST') {
         const { name, is_christian } = req.body;
-        // TODO validate req.body values
+        // validate req.body values
+        console.log('{ name, is_christian }: ', { name, is_christian });
 
         sql = `INSERT INTO public.churches (name, is_christian) VALUES ($1, $2) RETURNING *`;
         data = await pool.query(sql, [name, is_christian]);
