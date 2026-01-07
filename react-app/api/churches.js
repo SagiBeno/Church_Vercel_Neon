@@ -14,7 +14,7 @@ export default async function handler(req, res) {
 
     let sql = '';
     let data = [];
-    let error = null; // TODO - handle errors!
+    let error = null; // handle errors!
 
 
     if (req.method == 'GET') {
