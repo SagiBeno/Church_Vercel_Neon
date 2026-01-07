@@ -20,7 +20,7 @@ function App() {
       <h2>GET</h2>
 
       <h2>POST</h2>
-      <form method='POST'>
+      <form>
         <input type="text" name='church-name-input' placeholder='Church name...'/>
         <input type="checkbox" name='church-is-christian-checkbox' />Is Christian?
         <button onClick={ handlePostButtonClick }>
