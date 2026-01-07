@@ -14,6 +14,10 @@ function App() {
 
   } 
 
+  const handleChristianCheckboxChange = (e) => {
+    console.log('handleChristianCheckboxChange e: ', e)
+  }
+
   return (
     <>
       <h1>Churches</h1>
@@ -21,8 +25,8 @@ function App() {
 
       <h2>POST</h2>
       <form>
-        <input type="text" name='church-name-input' placeholder='Church name...' onChange={setChurchName}/>
-        <input type="checkbox" name='church-is-christian-checkbox' onChange={setChristian}/>Is Christian?
+        <input type="text" name='church-name-input' placeholder='Church name...' onChange={(e) => setChurchName(e.target.value)}/>
+        <input type="checkbox" name='church-is-christian-checkbox' value={isChristian} checked={isChristian} onChange={handleChristianCheckboxChange} />Is Christian?
         <button onClick={ handlePostButtonClick }>
           Submit Post
         </button>
