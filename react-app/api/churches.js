@@ -27,6 +27,7 @@ export default async function handler(req, res) {
     if (req.method == 'POST') {
         const { name, is_christian } = req.body;
         // validate req.body values
+        if (!name || is_christian === null) return res.status(300).json( { error: 'Bad Data' } );
         console.log('{ name, is_christian }: ', { name, is_christian });
 
         sql = `INSERT INTO public.churches (name, is_christian) VALUES ($1, $2) RETURNING *`;
