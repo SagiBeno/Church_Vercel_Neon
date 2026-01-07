@@ -1,14 +1,18 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 async function getData(setChurches) {
-  //const resJson = await fetch('/api')
+  //const res = await fetch('/api/churches');
 }
 
 function App() {
   const [churches, setChurches] = useState([]);
   const [churchName, setChurchName] = useState('');
   const [isChristian, setChristian] = useState(true);
+
+  useEffect( () => {
+    getData(setChurches);
+  }, [])
 
   const handlePostButtonClick = async (e) => {
     e.preventDefault();
