@@ -31,9 +31,15 @@ export default async function handler(req, res) {
         console.log('{ name, is_christian }: ', { name, is_christian });
 
         sql = `INSERT INTO public.churches (name, is_christian) VALUES ($1, $2) RETURNING *`;
-        data = await pool.query(sql, [name, is_christian]);
-        console.log('data: ', data)
-        return res.status(200).json({ sql, data, error });
+        
+        try {
+            data = await pool.query(sql, [name, is_christian]);
+        } catch (err) {
+            console.warn(err);
+        }
+        
+        console.log('data: ', data);
+        return res.status(201)?.json({ sql, data, error });
     }
 
     if (req.method == 'PATCH') {
