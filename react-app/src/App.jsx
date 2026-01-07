@@ -7,7 +7,8 @@ function App() {
   const [churchName, setChurchName] = useState('');
   const [isChristian, setChristian] = useState(true);
 
-  const handlePostButtonClick = async ( {churchName, isChristian} ) => {
+  const handlePostButtonClick = async (e) => {
+    e.preventDefault();
     console.log('handlePostButtonClick: ', {churchName, isChristian});
     // TODO - fetch POST endpoint
 
@@ -19,10 +20,10 @@ function App() {
       <h2>GET</h2>
 
       <h2>POST</h2>
-      <form>
+      <form method='POST'>
         <input type="text" name='church-name-input' placeholder='Church name...'/>
         <input type="checkbox" name='church-is-christian-checkbox' />Is Christian?
-        <button onClick={ () => handlePostButtonClick( {churchName, isChristian} )}>
+        <button onClick={ handlePostButtonClick }>
           Submit Post
         </button>
       </form>
